@@ -7,7 +7,16 @@ class Manager < Employee
         @employees = []
     end
     def bonus(multi)
-        bonus = employees.salary.sum * multi 
+        bonus = 0
+        # bonus = employees.salary.sum * multi 
+        self.employees.each do |emp|
+            unless emp.employees.nil?
+                bonus += emp.bonus(multi) 
+            else
+                bonus += emp.salary
+            end
+        end
+        bonus * multi
     end
     #Alvin.bonus alvin.employee .each |emp| emp.employee unless employee.empty? emp.salary
     # multi * employees total salary
