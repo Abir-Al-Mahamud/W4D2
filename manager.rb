@@ -1,3 +1,4 @@
+require 'byebug'
 class Manager < Employee
     
     attr_reader :employees
@@ -7,15 +8,19 @@ class Manager < Employee
         @employees = []
     end
     def bonus(multi)
+        debugger
         bonus = 0
         # bonus = employees.salary.sum * multi 
         self.employees.each do |emp|
-            unless emp.employees.nil?
-                bonus += emp.bonus(multi) 
+            unless emp.is_a?(Employee) 
+                debugger
+                bonus += emp.bonus(multi) + emp.salary
             else
                 bonus += emp.salary
+                debugger
             end
         end
+        debugger
         bonus * multi
     end
     #Alvin.bonus alvin.employee .each |emp| emp.employee unless employee.empty? emp.salary
